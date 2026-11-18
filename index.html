@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8fafc">
+  <meta name="description" content="Góc nhỏ ghi lại suy nghĩ, ghi chú công nghệ và những điều thường ngày.">
+  <title>Góc nhỏ — Personal Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Markdown + syntax highlighting; CDN libraries keep this project backend-free. -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+  <header class="site-header sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#/" class="brand text-lg font-bold tracking-tight">góc nhỏ<span class="text-indigo-600">.</span></a>
+      <nav class="flex items-center gap-2 text-sm">
+        <a href="#/" class="nav-link">Trang chủ</a>
+        <button id="editModeBtn" class="rounded-full border border-slate-300 px-4 py-2 font-medium hover:border-indigo-400 hover:text-indigo-700">Chỉnh sửa</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-5 py-10 md:py-14">
+    <div id="editorNotice" class="mb-6 hidden rounded-xl border border-indigo-200 bg-indigo-50 p-4 text-sm text-indigo-900">
+      <strong>Chế độ chỉnh sửa đang bật.</strong> Kéo thả các khối để sắp xếp, bấm vào nội dung có viền nét đứt để sửa. Thay đổi được lưu trên trình duyệt này.
+    </div>
+    <div id="homeView">
+      <div id="sections" class="space-y-12">
+        <section id="hero" data-section="hero" class="section-block">
+          <div class="hero-panel rounded-3xl bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-800 px-7 py-12 text-white md:px-12 md:py-16">
+            <p class="mb-4 text-sm font-semibold uppercase tracking-[.22em] text-indigo-200" data-edit="eyebrow">Ghi chép cá nhân · Công nghệ · Cuộc sống</p>
+            <h1 class="max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-6xl" data-edit="headline">Xin chào, đây là góc nhỏ của tôi.</h1>
+            <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300 md:text-lg" data-edit="intro">Một nơi lưu lại những điều tôi học được, những ý tưởng bất chợt và vài câu chuyện trên hành trình mỗi ngày.</p>
+            <a href="#posts" class="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-indigo-100">Khám phá bài viết <span class="ml-2">→</span></a>
+          </div>
+        </section>
+
+        <section id="about" data-section="about" class="section-block grid gap-6 md:grid-cols-[1fr_2fr] md:items-center">
+          <div>
+            <p class="section-kicker">01 / ABOUT</p>
+            <h2 class="section-title" data-edit="aboutTitle">Một chút về tôi</h2>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 md:p-8">
+            <p class="leading-8 text-slate-600" data-edit="bio">Tôi yêu việc tìm hiểu cách mọi thứ vận hành, thích ghi chú lại kiến thức hữu ích và tin rằng những điều nhỏ bé được tích lũy mỗi ngày sẽ tạo nên khác biệt lớn.</p>
+          </div>
+        </section>
+
+        <section id="posts" data-section="posts" class="section-block">
+          <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div><p class="section-kicker">02 / JOURNAL</p><h2 class="section-title" data-edit="postsTitle">Bài viết gần đây</h2></div>
+            <button id="addPostBtn" class="edit-only hidden rounded-full bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">+ Thêm bài viết</button>
+          </div>
+          <div id="postList" class="grid gap-5 md:grid-cols-2 lg:grid-cols-3"></div>
+        </section>
+
+        <section id="gallery" data-section="gallery" class="section-block">
+          <div class="mb-6"><p class="section-kicker">03 / MOMENTS</p><h2 class="section-title" data-edit="galleryTitle">Một vài khoảnh khắc</h2></div>
+          <div class="grid gap-4 sm:grid-cols-3">
+            <figure class="overflow-hidden rounded-2xl bg-slate-200"><img class="gallery-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80" alt="Góc làm việc với máy tính"><figcaption class="p-3 text-sm text-slate-500">Một góc làm việc yên tĩnh</figcaption></figure>
+            <figure class="overflow-hidden rounded-2xl bg-slate-200"><img class="gallery-img" src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=900&q=80" alt="Ánh nắng buổi sớm"><figcaption class="p-3 text-sm text-slate-500">Bắt đầu ngày mới</figcaption></figure>
+            <figure class="overflow-hidden rounded-2xl bg-slate-200"><img class="gallery-img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=80" alt="Bầu trời đêm đầy sao"><figcaption class="p-3 text-sm text-slate-500">Những khoảng lặng</figcaption></figure>
+          </div>
+        </section>
+
+        <section id="social" data-section="social" class="section-block rounded-2xl border border-slate-200 bg-white p-7 md:p-9">
+          <p class="section-kicker">04 / ELSEWHERE</p><h2 class="section-title" data-edit="socialTitle">Kết nối với tôi</h2>
+          <p class="mt-3 max-w-xl leading-7 text-slate-600" data-edit="socialText">Bạn có thể tìm thấy tôi ở những không gian trực tuyến bên dưới.</p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a class="social-link" href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a>
+            <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a class="social-link" href="mailto:hello@example.com">Email ↗</a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <article id="postView" class="mx-auto hidden max-w-3xl">
+      <a href="#/" class="mb-8 inline-flex text-sm font-semibold text-indigo-700 hover:text-indigo-900">← Quay lại trang chủ</a>
+      <div id="postContent" class="prose-blog"></div>
+    </article>
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+      <span data-edit="footerText">© 2026 Góc nhỏ. Viết và lưu giữ những điều đáng nhớ.</span>
+      <span>Được xây dựng tối giản · Static site</span>
+    </div>
+  </footer>
+
+  <div id="editorBar" class="editor-bar hidden" aria-label="Công cụ chỉnh sửa">
+    <span class="hidden text-xs font-medium text-slate-500 sm:inline">LOCAL EDITOR</span>
+    <button id="layoutBtn" class="toolbar-btn">Sắp xếp khối</button>
+    <button id="exportBtn" class="toolbar-btn">Xuất dữ liệu</button>
+    <label class="toolbar-btn cursor-pointer">Nhập dữ liệu<input id="importInput" type="file" accept="application/json" class="hidden"></label>
+    <button id="resetBtn" class="toolbar-btn text-rose-600">Khôi phục</button>
+    <button id="doneBtn" class="toolbar-btn toolbar-primary">Hoàn tất</button>
+  </div>
+
+  <dialog id="postDialog" class="w-[min(92vw,680px)] rounded-2xl p-0 shadow-2xl backdrop:bg-slate-950/50">
+    <form id="postForm" class="space-y-4 p-6">
+      <div class="flex items-center justify-between"><h3 class="text-xl font-bold">Bài viết</h3><button type="button" id="closeDialog" class="text-2xl text-slate-400">×</button></div>
+      <input type="hidden" id="postId">
+      <label class="form-label">Tiêu đề<input id="postTitle" class="form-input" required maxlength="120"></label>
+      <label class="form-label">Mô tả ngắn<input id="postExcerpt" class="form-input" maxlength="220"></label>
+      <label class="form-label">Ngày đăng<input id="postDate" type="date" class="form-input"></label>
+      <label class="form-label">Ảnh bìa (URL)<input id="postImage" type="url" class="form-input" placeholder="https://..."></label>
+      <label class="form-label">Nội dung Markdown<textarea id="postBody" rows="12" class="form-input font-mono text-sm" required></textarea></label>
+      <p class="text-xs text-slate-500">Hỗ trợ tiêu đề, danh sách, liên kết, ảnh và khối code Markdown.</p>
+      <div class="flex justify-end gap-2"><button type="button" id="deletePostBtn" class="mr-auto hidden rounded-full px-4 py-2 text-sm text-rose-600 hover:bg-rose-50">Xóa bài</button><button type="button" id="cancelDialog" class="toolbar-btn">Hủy</button><button class="toolbar-btn toolbar-primary" type="submit">Lưu bài viết</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
